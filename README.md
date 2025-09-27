@@ -25,7 +25,7 @@ Project Convenience analyzes locations using AI to tell you **YES**, **NO**, or 
 - How many shops/services are nearby
 - How well-connected the area is
 
-> **⚠️ Important**: This model is trained specifically for the **Fertile Crescent region** (Lebanon, Syria, Jordan, Israel/Palestine, Iraq, Turkey). Locations outside this region will produce **random/unreliable results**.
+> **⚠️ Important**: This model is trained specifically for the **Fertile Crescent region** (Lebanon, Syria, Jordan, Palestine, Iraq, Turkey). Locations outside this region will produce **random/unreliable results**.
 
 ### How to Use (Super Simple!)
 
