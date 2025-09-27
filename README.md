@@ -13,36 +13,6 @@
 
 **Project Convenience** is an AI-powered platform that analyzes any location to determine if it's a good spot for opening a convenience store. Simply enter coordinates and get instant, data-driven recommendations with interactive maps.
 
-> **💡 Business Planning Tool**: While this tool focuses on convenience stores, the underlying methodology can be adapted for **any retail business location planning**. This serves as an excellent **starting point** for entrepreneurs and business planners, though many other factors (demographics, competition analysis, market research, etc.) should be considered in real-world business decisions.
-
----
-
-## 🎯 **Project Scope & Rationale**
-
-### Why Convenience Stores?
-This project focuses specifically on **convenience stores** for two key reasons:
-
-1. **Time Limitation**: As an academic project with limited development time, we chose to focus on one specific business type rather than attempting to create a universal solution
-2. **Common Business Model**: Convenience stores are ubiquitous across the Fertile Crescent region, making them an ideal case study for location analysis
-
-### Broader Applications
-While this tool analyzes convenience store viability, the **core methodology can be adapted** for:
-- **Retail businesses** (restaurants, pharmacies, gas stations)
-- **Service businesses** (banks, clinics, repair shops)
-- **Commercial real estate** evaluation
-- **Urban planning** and development
-
-### Important Disclaimer
-This tool provides a **data-driven starting point** for business location planning, but real-world business decisions require considering many additional factors:
-- **Demographics** and target market analysis
-- **Competition** assessment and market saturation
-- **Economic indicators** and purchasing power
-- **Regulatory** and zoning requirements
-- **Accessibility** and transportation patterns
-- **Seasonal** and temporal factors
-
-> **⚠️ Use Case**: This is a **proof-of-concept** and **educational tool** designed for the Fertile Crescent region. Always conduct comprehensive market research before making actual business investments.
-
 ---
 
 ## 👤 **User Guide**
@@ -119,56 +89,9 @@ docker-compose up --build
 - **⚠️ Geographic Limitation**: Model only works reliably within Fertile Crescent region
 
 **Data Sources:**
-- **OpenStreetMap (OSM)**: Primary data source for all geographic information
-  - Street networks and road infrastructure
-  - Points of Interest (POIs) - shops, restaurants, amenities
-  - Land use data (parks, green spaces, commercial areas)
-  - Real-time data extraction via Overpass API
-- **Pre-configured city dataset**: 37+ cities across Fertile Crescent region
-- **Caching system**: OSMnx cache directory stores API responses locally
-
-### 📊 **Dataset Acquisition Process**
-
-**How We Get the Data:**
-
-1. **Initial City Dataset** (`data/cities.csv`):
-   - Contains 37+ cities across the Fertile Crescent region
-   - Each city has: name, latitude, longitude coordinates
-   - Covers Lebanon, Syria, Jordan, Israel/Palestine, Iraq, and Turkey
-   - Manually curated to ensure geographic diversity
-
-2. **Feature Extraction** (`generate_dataset.py`):
-   - **OSMnx Library**: Connects to OpenStreetMap's Overpass API
-   - **Street Network Analysis**: Downloads road networks within 1000m radius
-   - **POI Collection**: Extracts amenities, shops, leisure facilities, land use
-   - **Parallel Processing**: Uses ThreadPoolExecutor for efficient data gathering
-   - **Error Handling**: Graceful fallbacks when API calls fail
-
-3. **Data Processing Pipeline**:
-   ```
-   Cities CSV → OSMnx API Calls → Feature Extraction → Features CSV
-   ```
-   - **Input**: City coordinates from `data/cities.csv`
-   - **Processing**: Real-time API calls to OpenStreetMap
-   - **Output**: Processed features saved to `data/features.csv`
-
-4. **Caching System** (`cache/` directory):
-   - **OSMnx Cache**: Stores API responses locally (88+ cached files)
-   - **Performance**: Avoids repeated API calls for same locations
-   - **Reliability**: Works offline after initial data collection
-
-**Data Features Extracted:**
-- `street_km_per_km2`: Street density per square kilometer
-- `inters_per_km2`: Intersection density per square kilometer  
-- `green_pct`: Percentage of green space in the area
-- `poi_count_total`: Total number of points of interest
-- `avg_node_degree`: Average connectivity of road network nodes
-
-**API Usage:**
-- **Overpass API**: OpenStreetMap's query service
-- **Rate Limiting**: Respects OSM's usage policies (modest worker count)
-- **Timeout**: 180-second timeout for large queries
-- **Fallback Methods**: Multiple POI extraction strategies for reliability
+- OpenStreetMap (street networks, POIs, land use)
+- Pre-configured city dataset
+- Real-time feature extraction
 
 ### Project Structure
 ```
@@ -192,7 +115,7 @@ Project Convenience/
 ### Geographic Coverage
 **⚠️ CRITICAL LIMITATION**: This model is **ONLY** optimized for the **Fertile Crescent** region:
 - 🇱🇧 Lebanon, 🇸🇾 Syria, 🇯🇴 Jordan
-- 🇮🇱 Israel/Palestine, 🇮🇶 Iraq, 🇹🇷 Turkey
+- 🇵🇸 Palestine, 🇮🇶 Iraq, 🇹🇷 Turkey
 
 **Locations outside this region will produce random/unreliable predictions** as the model was not trained on data from other geographic areas.
 
