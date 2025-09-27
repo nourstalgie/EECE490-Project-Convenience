@@ -40,7 +40,12 @@ def ensure_model_exists():
     if not os.path.exists('model.pkl'):
         print("🤖 ML model not found. Training model...")
         try:
-            subprocess.check_call([sys.executable, 'train_model.py'])
+            # Get the directory where this script is located
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            train_script = os.path.join(script_dir, 'train_model.py')
+            
+            # Run from the script directory
+            subprocess.check_call([sys.executable, train_script], cwd=script_dir)
             print("✅ Model trained successfully!")
         except subprocess.CalledProcessError:
             print("❌ Failed to train model. Please check your data files.")
@@ -54,7 +59,12 @@ def ensure_data_exists():
     if not os.path.exists('data/features.csv'):
         print("📊 Features data not found. Generating dataset...")
         try:
-            subprocess.check_call([sys.executable, 'generate_dataset.py'])
+            # Get the directory where this script is located
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            dataset_script = os.path.join(script_dir, 'generate_dataset.py')
+            
+            # Run from the script directory
+            subprocess.check_call([sys.executable, dataset_script], cwd=script_dir)
             print("✅ Dataset generated successfully!")
         except subprocess.CalledProcessError:
             print("❌ Failed to generate dataset. Please check your setup.")
@@ -80,6 +90,10 @@ def main():
     """Main function to run Project Convenience"""
     print("🚀 Starting Project Convenience - AI Location Intelligence Platform")
     print("=" * 60)
+    
+    # Change to the script directory to ensure all operations happen in the right place
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(script_dir)
     
     # Check and install requirements
     check_requirements()
