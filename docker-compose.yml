@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  marshmellow-app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+      - ./cache:/app/cache
+    environment:
+      - FLASK_ENV=production
+    restart: unless-stopped
